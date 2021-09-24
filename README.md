@@ -11,11 +11,18 @@ https://digilent.com/reference/programmable-logic/guides/installing-vivado-and-s
 
 We can now create a new project using the Vivado IDE:
 
-  Create Project -> Next ->
-    choose project name and directory
-    Next -> RTL Project -> Next -> Next -> Next -> Boards ->
-    choose the correct board
-    Next -> Finish
-     
-We now have an empty skeleton project.
+* Create Project -> Next ->
+* _choose project name and directory_
+* Next -> RTL Project -> Next -> Next -> Next -> Boards ->
+* _choose the correct board_
+* Next -> Finish
+
+Next we add sources:
+
+* File -> Add Sources ->
+* Add or creadte design sources -> Create File
+* _Choose Verilog file type and a name_
+* Ok -> Finish -> Ok
+
+
 
