@@ -21,7 +21,9 @@ https://www.xilinx.com/support/answers/59128.html?_ga=2.256441865.307985857.1632
 
 ## Project Creation
 
-We can now create a new project using the Vivado IDE:
+We can now create a new project using the Vivado IDE.
+
+This first project loosely follows the instructions in this video: https://www.youtube.com/watch?v=pkDWzG8spvg&t=890s
 
 * Create Project -> Next ->
 * _choose project name and directory_
@@ -49,3 +51,12 @@ Edit the constraint file and modify the pin assignments to map the names used in
 We are now ready to generate the bitstream: *Generate Bitstream*, wait for completion and then *Open Hardware Manager*. If no target is open: *Open Target -> Auto Connect*. Then choose *Program Device* to upload your design to the board.
 
 It makes sense to verify that you have the correct device (via *Refresh Device*). In my case I discovered I could not program successfully becase I had accidentally picked the wrong device when setting up the project. This is easily fixed by going back to *Settings*, then redoing synthesis and bitstream generation.
+
+## Version Control
+
+The Vivado project files are not suitable for direct version control. Instead, the recommended approach is to export a `tcl` scropt that will generate a project on demand. Some instructions for this are available here:
+
+https://www.fpgadeveloper.com/2014/08/version-control-for-vivado-projects.html/
+
+I used this as a starting point and improvised. My git repo for for this project now contains only the script, and the main verilog and constraint files. The project can be inflated from the IDE, synthesized, implemented and bit-streamed quickly from a fresh check-out.
+
