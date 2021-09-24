@@ -46,4 +46,6 @@ Edit the constraint file and modify the pin assignments to map the names used in
 
 ## Bitstream Generation
 
-We are now ready to generate the bitstream: *Generate Bitstream*, wait for completion and then *Open Hardware Manager*. If no target is open: *Open Target -> Auto Connect*.
+We are now ready to generate the bitstream: *Generate Bitstream*, wait for completion and then *Open Hardware Manager*. If no target is open: *Open Target -> Auto Connect*. Then choose *Program Device* to upload your design to the board.
+
+It makes sense to verify that you have the correct device (via *Refresh Device*). In my case I discovered I could not program successfully becase I had accidentally picked the wrong device when setting up the project. This is easily fixed by going back to *Settings*, then redoing synthesis and bitstream generation.
