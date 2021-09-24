@@ -3,7 +3,7 @@ FPGA Example Projects
 
 ## Toolchain Installation
 
-My first FPGA development board ia the NEXYS A7 50T from Digilent. To get started the Xilinx toolchain, called Vivado, has to be installed:  
+My first FPGA development board is the NEXYS A7 50T from Digilent. To get started the Xilinx toolchain, called Vivado, has to be installed:  
 
 https://www.xilinx.com/support/download.html
 
