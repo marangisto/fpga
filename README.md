@@ -46,7 +46,7 @@ Use the same *File -> Add Sources* option but this time with *Add or create cons
 
 Edit the constraint file and modify the pin assignments to map the names used in your design, e.g. to send a signal named *O* to LED-1, change `LED[1]` to `O` in the relevant `get_ports {..}` expression.
 
-## Bitstream Generation
+## Bitstream Generation & Device Programming
 
 We are now ready to generate the bitstream: *Generate Bitstream*, wait for completion and then *Open Hardware Manager*. If no target is open: *Open Target -> Auto Connect*. Then choose *Program Device* to upload your design to the board.
 
