@@ -36,8 +36,8 @@
 proc checkRequiredFiles { origin_dir} {
   set status true
   set files [list \
- "[file normalize "$origin_dir/../../id.srcs/sources_1/new/main.v"]"\
- "[file normalize "$origin_dir/../../id.srcs/constrs_1/imports/digilent-xdc-master/Nexys-A7-50T-Master.xdc"]"\
+ "[file normalize "$origin_dir/id.srcs/sources_1/new/main.v"]"\
+ "[file normalize "$origin_dir/id.srcs/constrs_1/imports/digilent-xdc-master/Nexys-A7-50T-Master.xdc"]"\
   ]
   foreach ifile $files {
     if { ![file isfile $ifile] } {
@@ -113,7 +113,8 @@ if { $::argc > 0 } {
 }
 
 # Set the directory path for the original project from where this script was exported
-set orig_proj_dir "[file normalize "$origin_dir/../../"]"
+set origin_dir [ file dirname [ info script ] ]
+set orig_proj_dir [file normalize $origin_dir ]
 
 # Check for paths and files needed for project creation
 set validate_required 0
@@ -127,7 +128,7 @@ if { $validate_required } {
 }
 
 # Create project
-create_project ${_xil_proj_name_} ./${_xil_proj_name_} -part xc7a50ticsg324-1L
+create_project ${_xil_proj_name_} $origin_dir/${_xil_proj_name_} -part xc7a50ticsg324-1L -force
 
 # Set the directory path for the new project
 set proj_dir [get_property directory [current_project]]
@@ -156,7 +157,7 @@ if {[string equal [get_filesets -quiet sources_1] ""]} {
 set obj [get_filesets sources_1]
 # Import local files from the original project
 set files [list \
- [file normalize "${origin_dir}/../../id.srcs/sources_1/new/main.v" ]\
+ [file normalize "${origin_dir}/id.srcs/sources_1/new/main.v" ]\
 ]
 set imported_files [import_files -fileset sources_1 $files]
 
@@ -179,7 +180,7 @@ if {[string equal [get_filesets -quiet constrs_1] ""]} {
 set obj [get_filesets constrs_1]
 
 # Add/Import constrs file and set constrs file properties
-set file "[file normalize ${origin_dir}/../../id.srcs/constrs_1/imports/digilent-xdc-master/Nexys-A7-50T-Master.xdc]"
+set file "[file normalize ${origin_dir}/id.srcs/constrs_1/imports/digilent-xdc-master/Nexys-A7-50T-Master.xdc]"
 set file_imported [import_files -fileset constrs_1 [list $file]]
 set file "digilent-xdc-master/Nexys-A7-50T-Master.xdc"
 set file_obj [get_files -of_objects [get_filesets constrs_1] [list "*$file"]]
