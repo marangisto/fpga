@@ -15,6 +15,10 @@ We will also need the constraint file templates for the board. These can be down
 
 https://github.com/Digilent/digilent-xdc/archive/master.zip?_ga=2.114820295.156699094.1632468635-1321010191.1631887614
 
+Finally, when trying to connect to your device you may find that you need to install or tweak your drivers. In my case I read this post and hand-installed the Digilent Adept drivers found under the Xilinx directory:
+
+https://www.xilinx.com/support/answers/59128.html?_ga=2.256441865.307985857.1632484317-2069869458.1632484317
+
 ## Project Creation
 
 We can now create a new project using the Vivado IDE:
