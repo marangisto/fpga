@@ -23,8 +23,8 @@
 # 2. The following source(s) files that were local or imported into the original project.
 #    (Please see the '$orig_proj_dir' and '$origin_dir' variable setting below at the start of the script)
 #
-#    "C:/Users/marten/Projects/fpga/vivado/id/id.srcs/sources_1/new/main.v"
-#    "C:/Users/marten/Projects/fpga/vivado/id/id.srcs/constrs_1/imports/digilent-xdc-master/Nexys-A7-50T-Master.xdc"
+#    "C:/Users/marten/Projects/fpga/vivado/id/id.srcs/sources_1/main.v"
+#    "C:/Users/marten/Projects/fpga/vivado/id/id.srcs/constrs_1/Nexys-A7-50T-Master.xdc"
 #
 # 3. The following remote source files that were added to the original project:-
 #
@@ -36,8 +36,8 @@
 proc checkRequiredFiles { origin_dir} {
   set status true
   set files [list \
- "[file normalize "$origin_dir/id.srcs/sources_1/new/main.v"]"\
- "[file normalize "$origin_dir/id.srcs/constrs_1/imports/digilent-xdc-master/Nexys-A7-50T-Master.xdc"]"\
+ "[file normalize "$origin_dir/id.srcs/sources_1/main.v"]"\
+ "[file normalize "$origin_dir/id.srcs/constrs_1/Nexys-A7-50T-Master.xdc"]"\
   ]
   foreach ifile $files {
     if { ![file isfile $ifile] } {
@@ -157,7 +157,7 @@ if {[string equal [get_filesets -quiet sources_1] ""]} {
 set obj [get_filesets sources_1]
 # Import local files from the original project
 set files [list \
- [file normalize "${origin_dir}/id.srcs/sources_1/new/main.v" ]\
+ [file normalize "${origin_dir}/id.srcs/sources_1/main.v" ]\
 ]
 set imported_files [import_files -fileset sources_1 $files]
 
@@ -180,7 +180,7 @@ if {[string equal [get_filesets -quiet constrs_1] ""]} {
 set obj [get_filesets constrs_1]
 
 # Add/Import constrs file and set constrs file properties
-set file "[file normalize ${origin_dir}/id.srcs/constrs_1/imports/digilent-xdc-master/Nexys-A7-50T-Master.xdc]"
+set file "[file normalize ${origin_dir}/id.srcs/constrs_1/Nexys-A7-50T-Master.xdc]"
 set file_imported [import_files -fileset constrs_1 [list $file]]
 set file "digilent-xdc-master/Nexys-A7-50T-Master.xdc"
 set file_obj [get_files -of_objects [get_filesets constrs_1] [list "*$file"]]
