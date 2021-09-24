@@ -39,3 +39,7 @@ Open the source file add your Verilog code. Then you can run *RTL Analysis -> Op
 Use the same *File -> Add Sources* option but this time with *Add or create constraints*. We are not going to create this from scratch but rather use a template that came with the board. Use *Add Files*, navigate and select the relevant *master* file and check the *Copy constraints files into project* box before hitting *Finish*.
 
 Edit the constraint file and modify the pin assignments to map the names used in your design, e.g. to send a signal named *O* to LED-1, change `LED[1]` to `O` in the relevant `get_ports {..}` expression.
+
+## Bitstream Generation
+
+We are now ready to generate the bitstream: *Generate Bitstream*, wait for completion and then *Open Hardware Manager*. If no target is open: *Open Target -> Auto Connect*.
