@@ -135,7 +135,6 @@ set proj_dir [get_property directory [current_project]]
 
 # Set project properties
 set obj [current_project]
-set_property -name "board_part_repo_paths" -value "[file normalize "$origin_dir/../../../../../../AppData/Roaming/Xilinx/Vivado/2021.1/xhub/board_store/xilinx_board_store"]" -objects $obj
 set_property -name "board_part" -value "digilentinc.com:nexys-a7-50t:part0:1.0" -objects $obj
 set_property -name "default_lib" -value "xil_defaultlib" -objects $obj
 set_property -name "enable_vhdl_2008" -value "1" -objects $obj
@@ -182,9 +181,6 @@ set obj [get_filesets constrs_1]
 # Add/Import constrs file and set constrs file properties
 set file "[file normalize ${origin_dir}/id.srcs/constrs_1/Nexys-A7-50T-Master.xdc]"
 set file_imported [import_files -fileset constrs_1 [list $file]]
-set file "digilent-xdc-master/Nexys-A7-50T-Master.xdc"
-set file_obj [get_files -of_objects [get_filesets constrs_1] [list "*$file"]]
-set_property -name "file_type" -value "XDC" -objects $file_obj
 
 # Set 'constrs_1' fileset properties
 set obj [get_filesets constrs_1]
