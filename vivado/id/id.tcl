@@ -15,117 +15,16 @@
 #   run results please launch the synthesis/implementation runs as needed.
 #
 #*****************************************************************************************
-# NOTE: In order to use this script for source control purposes, please make sure that the
-#       following files are added to the source control system:-
-#
-# 1. This project restoration tcl script (id.tcl) that was generated.
-#
-# 2. The following source(s) files that were local or imported into the original project.
-#    (Please see the '$orig_proj_dir' and '$origin_dir' variable setting below at the start of the script)
-#
-#    "C:/Users/marten/Projects/fpga/vivado/id/id.srcs/sources_1/main.v"
-#    "C:/Users/marten/Projects/fpga/vivado/id/id.srcs/constrs_1/Nexys-A7-50T-Master.xdc"
-#
-# 3. The following remote source files that were added to the original project:-
-#
-#    <none>
-#
-#*****************************************************************************************
 
-# Check file required for this script exists
-proc checkRequiredFiles { origin_dir} {
-  set status true
-  set files [list \
- "[file normalize "$origin_dir/id.srcs/sources_1/main.v"]"\
- "[file normalize "$origin_dir/id.srcs/constrs_1/Nexys-A7-50T-Master.xdc"]"\
-  ]
-  foreach ifile $files {
-    if { ![file isfile $ifile] } {
-      puts " Could not find local file $ifile "
-      set status false
-    }
-  }
-
-  return $status
-}
 # Set the reference directory for source file relative paths (by default the value is script directory path)
 set origin_dir "."
-
-# Use origin directory path location variable, if specified in the tcl shell
-if { [info exists ::origin_dir_loc] } {
-  set origin_dir $::origin_dir_loc
-}
 
 # Set the project name
 set _xil_proj_name_ "id"
 
-# Use project name variable, if specified in the tcl shell
-if { [info exists ::user_project_name] } {
-  set _xil_proj_name_ $::user_project_name
-}
-
-variable script_file
-set script_file "id.tcl"
-
-# Help information for this script
-proc print_help {} {
-  variable script_file
-  puts "\nDescription:"
-  puts "Recreate a Vivado project from this script. The created project will be"
-  puts "functionally equivalent to the original project for which this script was"
-  puts "generated. The script contains commands for creating a project, filesets,"
-  puts "runs, adding/importing sources and setting properties on various objects.\n"
-  puts "Syntax:"
-  puts "$script_file"
-  puts "$script_file -tclargs \[--origin_dir <path>\]"
-  puts "$script_file -tclargs \[--project_name <name>\]"
-  puts "$script_file -tclargs \[--help\]\n"
-  puts "Usage:"
-  puts "Name                   Description"
-  puts "-------------------------------------------------------------------------"
-  puts "\[--origin_dir <path>\]  Determine source file paths wrt this path. Default"
-  puts "                       origin_dir path value is \".\", otherwise, the value"
-  puts "                       that was set with the \"-paths_relative_to\" switch"
-  puts "                       when this script was generated.\n"
-  puts "\[--project_name <name>\] Create project with the specified name. Default"
-  puts "                       name is the name of the project from where this"
-  puts "                       script was generated.\n"
-  puts "\[--help\]               Print help information for this script"
-  puts "-------------------------------------------------------------------------\n"
-  exit 0
-}
-
-if { $::argc > 0 } {
-  for {set i 0} {$i < $::argc} {incr i} {
-    set option [string trim [lindex $::argv $i]]
-    switch -regexp -- $option {
-      "--origin_dir"   { incr i; set origin_dir [lindex $::argv $i] }
-      "--project_name" { incr i; set _xil_proj_name_ [lindex $::argv $i] }
-      "--help"         { print_help }
-      default {
-        if { [regexp {^-} $option] } {
-          puts "ERROR: Unknown option '$option' specified, please type '$script_file -tclargs --help' for usage info.\n"
-          return 1
-        }
-      }
-    }
-  }
-}
-
 # Set the directory path for the original project from where this script was exported
 set origin_dir [ file dirname [ info script ] ]
 set orig_proj_dir [file normalize $origin_dir ]
-
-# Check for paths and files needed for project creation
-set validate_required 0
-if { $validate_required } {
-  if { [checkRequiredFiles $origin_dir] } {
-    puts "Tcl file $script_file is valid. All files required for project creation is accesable. "
-  } else {
-    puts "Tcl file $script_file is not valid. Not all files required for project creation is accesable. "
-    return
-  }
-}
 
 # Create project
 create_project ${_xil_proj_name_} $origin_dir/${_xil_proj_name_} -part xc7a50ticsg324-1L -force
