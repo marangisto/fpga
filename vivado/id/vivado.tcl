@@ -53,17 +53,10 @@ if {[string equal [get_filesets -quiet sources_1] ""]} {
 
 # Set 'sources_1' fileset object
 set obj [get_filesets sources_1]
-# Import local files from the original project
 set files [list \
- [file normalize "${origin_dir}/src/sources_1/main.v" ]\
+ [file normalize "${origin_dir}/src/sources_1/main.v"] \
 ]
-set imported_files [import_files -fileset sources_1 $files]
-
-# Set 'sources_1' fileset file properties for remote files
-# None
-
-# Set 'sources_1' fileset file properties for local files
-# None
+add_files -norecurse -fileset $obj $files
 
 # Set 'sources_1' fileset properties
 set obj [get_filesets sources_1]
@@ -78,8 +71,12 @@ if {[string equal [get_filesets -quiet constrs_1] ""]} {
 set obj [get_filesets constrs_1]
 
 # Add/Import constrs file and set constrs file properties
-set file "[file normalize ${origin_dir}/src/constrs_1/Nexys-A7-50T-Master.xdc]"
-set file_imported [import_files -fileset constrs_1 [list $file]]
+set file "[file normalize "$origin_dir/src/constrs_1/Nexys-A7-50T-Master.xdc"]"
+set file_added [add_files -norecurse -fileset $obj [list $file]]
+set file "$origin_dir/src/constrs_1/Nexys-A7-50T-Master.xdc"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets constrs_1] [list "*$file"]]
+set_property -name "file_type" -value "XDC" -objects $file_obj
 
 # Set 'constrs_1' fileset properties
 set obj [get_filesets constrs_1]
