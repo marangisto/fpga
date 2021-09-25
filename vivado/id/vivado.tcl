@@ -20,7 +20,7 @@
 set origin_dir "."
 
 # Set the project name
-set _xil_proj_name_ "id"
+set _xil_proj_name_ "_vivado"
 
 # Set the directory path for the original project from where this script was exported
 set origin_dir [ file dirname [ info script ] ]
@@ -55,7 +55,7 @@ if {[string equal [get_filesets -quiet sources_1] ""]} {
 set obj [get_filesets sources_1]
 # Import local files from the original project
 set files [list \
- [file normalize "${origin_dir}/id.srcs/sources_1/main.v" ]\
+ [file normalize "${origin_dir}/src/sources_1/main.v" ]\
 ]
 set imported_files [import_files -fileset sources_1 $files]
 
@@ -78,7 +78,7 @@ if {[string equal [get_filesets -quiet constrs_1] ""]} {
 set obj [get_filesets constrs_1]
 
 # Add/Import constrs file and set constrs file properties
-set file "[file normalize ${origin_dir}/id.srcs/constrs_1/Nexys-A7-50T-Master.xdc]"
+set file "[file normalize ${origin_dir}/src/constrs_1/Nexys-A7-50T-Master.xdc]"
 set file_imported [import_files -fileset constrs_1 [list $file]]
 
 # Set 'constrs_1' fileset properties
