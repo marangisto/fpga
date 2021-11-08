@@ -33,6 +33,7 @@ cabal.config
 
 *~
 *.DS_Store
+stack.yaml.lock
 
 # IntelliJ
 /.idea
