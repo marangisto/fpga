@@ -42,10 +42,10 @@ stack test
 To compile the project to VHDL, run:
 
 ```bash
-stack run clash -- Example.Project --vhdl
+stack run clash -- RetroId --vhdl
 ```
 
-You can find the HDL files in `vhdl/`. The source can be found in `src/Example/Project.hs`.
+You can find the HDL files in `vhdl/`. The source can be found in `src/RetroId.hs`.
 
 ## Cabal (Linux, MacOS)
 **The following instructions only work for Cabal >=3.0 and GHC >=8.4.**
@@ -72,10 +72,10 @@ cabal run doctests --enable-tests
 To compile the project to VHDL, run:
 
 ```bash
-cabal run clash -- Example.Project --vhdl
+cabal run clash -- RetroId --vhdl
 ```
 
-You can find the HDL files in `vhdl/`. The source can be found in `src/Example/Project.hs`.
+You can find the HDL files in `vhdl/`. The source can be found in `src/RetroId.hs`.
 
 ## REPL
 Clash offers a [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) as a quick way to try things, similar to Python's `python` or Ruby's `irb`. Stack users can open the REPL by invoking:
@@ -158,14 +158,14 @@ Note that this whole section is a `common` "stanza". We'll use it as a template 
     ghc-typelits-knownnat
 ```
 
-These dependencies are fetched from [Hackage](https://hackage.haskell.org/), Haskell's store for packages. Next up is a `library` stanza. It defines where the source is located, in our case `src/`, and what modules can be found there. In our case that's just a single module, `Example.Project`.
+These dependencies are fetched from [Hackage](https://hackage.haskell.org/), Haskell's store for packages. Next up is a `library` stanza. It defines where the source is located, in our case `src/`, and what modules can be found there. In our case that's just a single module, `RetroId`.
 
 ```yaml
 library
   import: common-options
   hs-source-dirs: src
   exposed-modules:
-    Example.Project
+    RetroId
   default-language: Haskell2010
 ```
 
@@ -196,7 +196,7 @@ test-suite test-library
   ghc-options: -threaded
   main-is: unittests.hs
   other-modules:
-    Tests.Example.Project
+    Tests.RetroId
   build-depends:
     RetroId,
     QuickCheck,
@@ -249,10 +249,10 @@ This project uses [lts-17.13](https://www.stackage.org/lts-17.13), which include
 Note: If you need a newer Clash version, simply change the version bounds in `RetroId.cabal` and follow the hints given by Stack.
 
 ## src/
-This is where the source code of the project lives, as specified in `RetroId.cabal`. It contains a single file, `Example/Project.hs` which starts with:
+This is where the source code of the project lives, as specified in `RetroId.cabal`. It contains a single file, `RetroId.hs` which starts with:
 
 ```haskell
-module Example.Project (topEntity, plus) where
+module RetroId (topEntity, plus) where
 
 import Clash.Prelude
 
@@ -268,7 +268,7 @@ plus a b = a + b
 
 ```haskell
 -- | 'topEntity' is Clash's equivalent of 'main' in other programming
--- languages. Clash will look for it when compiling 'Example.Project'
+-- languages. Clash will look for it when compiling 'RetroId'
 -- and translate it to HDL. While polymorphism can be used freely in
 -- Clash projects, a 'topEntity' must be monomorphic and must use non-
 -- recursive types. Or, to put it hand-wavily, a 'topEntity' must be
@@ -280,28 +280,28 @@ topEntity = plus
 as the comment says `topEntity` will get compiled by Clash if we ask it to compile this module:
 
 ```
-stack run clash -- Example.Project --vhdl
+stack run clash -- RetroId --vhdl
 ```
 
 or
 
 ```
-cabal run clash -- Example.Project --vhdl
+cabal run clash -- RetroId --vhdl
 ```
 
 We could instead ask it to synthesize `plus` instead:
 
 ```
-stack run clash -- Example.Project --vhdl -main-is plus
+stack run clash -- RetroId --vhdl -main-is plus
 ```
 
 If you want to play around with Clash, this is probably where you would put all the definitions mentioned in ["Clash.Tutorial" on Hackage](https://hackage.haskell.org/package/clash-prelude).
 
 ## tests/
-Most of this directory is scaffolding, with the meat of the tests being defined in `tests/Tests/Example/Project.hs`. Writing good test cases is pretty hard: edge cases are easy to forget both in the implementation and tests. To this end, it's a good idea to use _fuzz testing_. In this project we use [Hedgehog](https://hedgehog.qa/):
+Most of this directory is scaffolding, with the meat of the tests being defined in `tests/Tests/RetroId.hs`. Writing good test cases is pretty hard: edge cases are easy to forget both in the implementation and tests. To this end, it's a good idea to use _fuzz testing_. In this project we use [Hedgehog](https://hedgehog.qa/):
 
 ```haskell
-import Example.Project (plus)
+import RetroId (plus)
 
 prop_plusIsCommutative :: H.Property
 prop_plusIsCommutative = H.property $ do
@@ -321,7 +321,7 @@ We can run the tests using `stack test` or `cabal run test-library --enable-test
 
 ```
 .
-  Tests.Example.Project
+  Tests.RetroId
     plusIsCommutative: OK
         ✓ plusIsCommutative passed 100 tests.
 

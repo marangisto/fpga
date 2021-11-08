@@ -1,4 +1,4 @@
-module Example.Project (topEntity, plus) where
+module RetroId (topEntity, plus) where
 
 import Clash.Prelude
 

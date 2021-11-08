@@ -78,7 +78,7 @@ library
   import: common-options
   hs-source-dirs: src
   exposed-modules:
-    Example.Project
+    RetroId
   default-language: Haskell2010
 
 -- Builds the executable 'clash', with RetroId project in scope
@@ -118,7 +118,7 @@ test-suite test-library
   ghc-options: -threaded
   main-is: unittests.hs
   other-modules:
-    Tests.Example.Project
+    Tests.RetroId
   build-depends:
     RetroId,
     QuickCheck,

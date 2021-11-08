@@ -2,9 +2,9 @@ import Prelude
 
 import Test.Tasty
 
-import qualified Tests.Example.Project
+import qualified Tests.RetroId
 
 main :: IO ()
 main = defaultMain $ testGroup "."
-  [ Tests.Example.Project.tests
+  [ Tests.RetroId.tests
   ]

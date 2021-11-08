@@ -1,4 +1,4 @@
-module Tests.Example.Project where
+module Tests.RetroId where
 
 import Prelude
 
